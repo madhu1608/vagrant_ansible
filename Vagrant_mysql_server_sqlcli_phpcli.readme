@@ -1,3 +1,24 @@
+Referred to:
+
+SERVER
+https://www.linode.com/docs/databases/mysql/how-to-install-mysql-on-centos-7/
+https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-centos-7
+https://www.tecmint.com/install-latest-mysql-on-rhel-centos-and-fedora/
+PHP
+**---setsebool -P httpd_can_network_connect on
+https://www.cyberciti.biz/faq/rhel-fedora-redhat-centos-install-mysql-extension-for-php/
+https://www.howtoforge.com/apache_php_mysql_on_centos_7_lamp
+https://www.tecmint.com/test-php-mysql-database-connection-using-script/
+https://www.tecmint.com/run-php-codes-from-linux-commandline/
+CLI
+https://www.cyberciti.biz/faq/centos-linux-56-install-mysql-client-only/
+# [ONSERVER]: mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'192.168.100.6' IDENTIFIED BY 'mypassword' WITH GRANT OPTION
+# [ONSERVER]: mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'192.168.100.7' IDENTIFIED BY 'mypassword' WITH GRANT OPTION
+#mysql -u USER-NAME-HERE -h MYSQL-DB-SERVER-IP-ADDRESS-HERE -p DB-NAME
+
+
+
+
 "server.ubuntu.com":
 
 Run the following, this will install the mysql server. At step mysql_secure_installation ensure to set a password for root user:
