@@ -31,6 +31,8 @@ Run the following, to setup the client and connect using command line tools.
     [vagrant@sqlcli ~]$telnet 192.168.100.5 3306
     [vagrant@sqlcli ~]$mysql -u root -h 192.168.100.5 -p mysql
 
+"phpcli.ubuntu.com"
+Run the following, to setup the php client and connect using php -f command or browser.
 
     [vagrant@phpcli ~]$sudo yum update -y
     [vagrant@phpcli ~]$sudo yum install wget
@@ -59,6 +61,7 @@ As root
     [root@phpcli ~]#curl localhost/mysql-test.php
     [root@phpcli ~]#yum install -y mysql-community-client
     [root@phpcli ~]#mysql -u root -h 192.168.100.5 -p mysql
+    [root@phpcli ~]#setsebool -P httpd_can_network_connect on
     [root@phpcli ~]#curl localhost/mysql-test.php
 
         [root@phpcli ~]# cat /var/www/html/mysql-test.php
