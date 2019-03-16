@@ -1,11 +1,11 @@
 [web]
-webserver1.ubuntu.com ansible_ssh_host=192.168.100.5
+webserver1.ubuntu.com ansible_ssh_host=192.168.100.8
 
 [dns]
-backend.ubuntu.com ansible_ssh_host=192.168.100.5
+backend.ubuntu.com ansible_ssh_host=192.168.100.8
 
 [database]
-backend.ubuntu.com ansible_ssh_host=192.168.100.5
+backend.ubuntu.com ansible_ssh_host=192.168.100.8
 
 [frontend:children]
 web
@@ -17,7 +17,7 @@ database
 [web:vars]
 http_port=80
 proxy_timeout=5
-ansible_ssh_port=82
+ansible_ssh_port=22
 
 [backend:vars]
 ansible_ssh_port=22
