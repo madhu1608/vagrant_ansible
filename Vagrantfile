@@ -2,7 +2,6 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-
   config.vm.define "web" do |web|
     web.vm.box                      = "hashicorp-vagrant/centos-7.4"
     web.ssh.username                = "vagrant"
