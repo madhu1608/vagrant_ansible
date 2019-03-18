@@ -8,6 +8,7 @@ Vagrant.configure("2") do |config|
     web.ssh.password                = "vagrant"
     web.ssh.insert_key              = false
     web.ssh.forward_agent           = true
+    web.vm.box_check_update         = false
     web.vm.hostname                 = "web.ubuntu.com"
 
     web.vm.network                  "private_network", ip: "192.168.100.5"
@@ -21,6 +22,7 @@ Vagrant.configure("2") do |config|
     ctr.ssh.insert_key              = false
     ctr.ssh.forward_agent           = true
     ctr.vm.hostname                 = "ctr.ubuntu.com"
+    ctr.vm.box_check_update         = false
 
     ctr.vm.network                  "private_network", ip: "192.168.100.4"
     ctr.vm.synced_folder            "ctr", "/vagrant"
