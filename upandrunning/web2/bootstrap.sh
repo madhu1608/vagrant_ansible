@@ -1,1 +1,1 @@
-echo you are logged into $HOSTNAME
+echo $HOSTNAME is ready
