@@ -1,0 +1,4 @@
+[webservers]
+#web1.ubuntu.com ansible_host=192.168.100.3
+#web2.ubuntu.com ansible_host=192.168.100.4
+web3.ubuntu.com ansible_host=192.168.100.5

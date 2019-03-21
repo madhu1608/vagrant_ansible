@@ -1,0 +1,30 @@
+---
+- name: Configure nginx with TLS
+  hosts: webservers
+  become: yes
+
+  vars:
+    key_file: /etc/nginx/ssl/localhost.key.pem
+    cert_file: /etc/nginx/ssl/localhost.chain.cert.pem
+    server_name: localhost
+
+  tasks:
+    - name: install epel-release
+      yum: name=epel-release
+    - name: install nginx
+      yum: name=nginx
+    - name: create directories for ssl certificates
+      file: path=/etc/nginx/ssl state=directory
+    - name: copy TLS key
+      copy: src=files/localhost.key.pem dest={{ key_file }} owner=root mode=0600
+    - name: copy TLS cert
+      copy: src=files/localhost.chain.cert.pem dest={{ cert_file }} owner=root mode=0600
+    - name: copy nginx config file
+      template: src=files/nginx.conf.j2 dest=/etc/nginx/nginx.conf
+    - name: copy index.html
+      template: >
+        src=templates/index.html.j2 
+        dest=/usr/share/nginx/html/index.html
+        mode=0644
+    - name: restart nginx
+      service: name=nginx state=restarted
