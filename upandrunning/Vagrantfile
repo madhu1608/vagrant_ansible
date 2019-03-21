@@ -1,0 +1,57 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.define "ans" do |ans|
+    ans.vm.box                      = "hashicorp-vagrant/centos-7.4"
+    ans.ssh.username                = "vagrant"
+    ans.ssh.password                = "vagrant"
+    ans.ssh.insert_key              = false
+    ans.ssh.forward_agent           = true
+    ans.vm.box_check_update         = false
+    ans.vm.hostname                 = "ans.ubuntu.com"
+    ans.vm.network                  "private_network", ip: "192.168.100.2"
+    ans.vm.synced_folder            "ans", "/vagrant"
+    ans.vm.provision                :shell, path: "ans/bootstrap.sh"
+  end
+
+  config.vm.define "web1" do |web1|
+    web1.vm.box                      = "hashicorp-vagrant/centos-7.4"
+    web1.ssh.username                = "vagrant"
+    web1.ssh.password                = "vagrant"
+    web1.ssh.insert_key              = false
+    web1.ssh.forward_agent           = true
+    web1.vm.box_check_update         = false
+    web1.vm.hostname                 = "web1.ubuntu.com"
+    web1.vm.network                  "private_network", ip: "192.168.100.3"
+    web1.vm.synced_folder            "web1", "/vagrant"
+    web1.vm.provision                :shell, path: "web1/bootstrap.sh"
+  end
+  config.vm.define "web2" do |web2|
+    web2.vm.box                      = "hashicorp-vagrant/centos-7.4"
+    web2.ssh.username                = "vagrant"
+    web2.ssh.password                = "vagrant"
+    web2.ssh.insert_key              = false
+    web2.ssh.forward_agent           = true
+    web2.vm.box_check_update         = false
+    web2.vm.hostname                 = "web2.ubuntu.com"
+    web2.vm.network                  "private_network", ip: "192.168.100.4"
+    web2.vm.synced_folder            "web2", "/vagrant"
+    web2.vm.provision                :shell, path: "web2/bootstrap.sh"
+  end
+  config.vm.define "web3" do |web3|
+    web3.vm.box                      = "hashicorp-vagrant/centos-7.4"
+    web3.ssh.username                = "vagrant"
+    web3.ssh.password                = "vagrant"
+    web3.ssh.insert_key              = false
+    web3.ssh.forward_agent           = true
+    web3.vm.box_check_update         = false
+    web3.vm.hostname                 = "web3.ubuntu.com"
+    web3.vm.network                  "private_network", ip: "192.168.100.5"
+    web3.vm.synced_folder            "web3", "/vagrant"
+    web3.vm.provision                :shell, path: "web3/bootstrap.sh"
+  end
+
+end
+
+
