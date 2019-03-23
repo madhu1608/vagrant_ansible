@@ -4,21 +4,19 @@
   become: yes
 
   vars:
-    key_file: /etc/nginx/ssl/localhost.key.pem
-    cert_file: /etc/nginx/ssl/localhost.chain.cert.pem
-    server_name: localhost
+    key_file: /etc/nginx/ssl/192.168.100.3.key.pem
+    cert_file: /etc/nginx/ssl/192.168.100.3.chain.cert.pem
+    server_name: 192.168.100.3
 
   tasks:
-    - name: install epel-release
-      yum: name=epel-release
     - name: install nginx
-      yum: name=nginx
+      apt: name=nginx
     - name: create directories for ssl certificates
       file: path=/etc/nginx/ssl state=directory
     - name: copy TLS key
-      copy: src=files/localhost.key.pem dest={{ key_file }} owner=root mode=0600
+      copy: src=files/192.168.100.3.key.pem dest={{ key_file }} owner=root mode=0600
     - name: copy TLS cert
-      copy: src=files/localhost.chain.cert.pem dest={{ cert_file }} owner=root mode=0600
+      copy: src=files/192.168.100.3.chain.cert.pem dest={{ cert_file }} owner=root mode=0600
     - name: copy nginx config file
       template: src=files/nginx.conf.j2 dest=/etc/nginx/nginx.conf
     - name: copy index.html
