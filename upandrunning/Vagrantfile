@@ -23,6 +23,7 @@ Vagrant.configure("2") do |config|
     ans.vm.box_check_update         = false
     ans.vm.hostname                 = "ans.ubuntu.com"
     ans.vm.network                  "private_network", ip: "192.168.100.2"
+    ans.vm.synced_folder            "ans", "/vagrant"
     ans.vm.provision                :shell, path: "ans/bootstrap.sh"
   end
 end
