@@ -1,6 +1,7 @@
-#!/usr/bin/bash -xe
-yum update -y
-yum install ansible -y
-echo /vagrant/seamless-login-to-nodes.sh >> ~vagrant/.bashrc
+#!/bin/bash -xe
+apt-get update -y
+apt-get install ansible sshpass -y
+pwd
+/vagrant/ans/seamless-login-to-nodes.sh
 echo $HOSTNAME is ready
 
