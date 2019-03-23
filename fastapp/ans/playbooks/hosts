@@ -1,0 +1,46 @@
+[production]
+someprodserver.com
+
+[staging]
+somestageserver.com
+
+[ubuntucom]
+web.ubuntu.com  ansible_host=192.168.100.3 ansible_user=vagrant ansible_password=vagrant
+task.ubuntu.com ansible_host=192.168.100.4 ansible_user=vagrant ansible_password=vagrant
+db.ubuntu.com   ansible_host=192.168.100.5 ansible_user=vagrant ansible_password=vagrant
+
+[web]
+web.ubuntu.com
+
+[task]
+task.ubuntu.com
+
+[rabiitmq]
+db.ubuntu.com
+
+[db]
+db.ubuntu.com
+
+[django:children]
+web
+task
+
+[all:vars]
+location=pune
+
+[production:vars]
+env=prd
+
+[staging:vars]
+env=stg
+
+[ubuntucom:vars]
+env=ubu
+db_primary_host=db.ubuntu.com
+db_primary_port=5432
+db_name=pgrdb
+db_user=pgruser
+db_password=pgrpass
+rabbitmq_host=db.ubuntu.com
+rabbitmq_port=5672
+

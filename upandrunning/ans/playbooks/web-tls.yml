@@ -6,7 +6,10 @@
   vars:
     key_file: /etc/nginx/ssl/192.168.100.3.key.pem
     cert_file: /etc/nginx/ssl/192.168.100.3.chain.cert.pem
-    server_name: 192.168.100.3
+    #server_name: 192.168.100.3
+
+  vars_files:
+    - var_files/nginx_vars.yml
 
   tasks:
     - name: install nginx
@@ -15,6 +18,9 @@
       file: path=/etc/nginx/ssl state=directory
     - name: copy TLS key
       copy: src=files/192.168.100.3.key.pem dest={{ key_file }} owner=root mode=0600
+    - debug: var=key_file
+    - name: debug TLS key
+      debug: var=key_file
     - name: copy TLS cert
       copy: src=files/192.168.100.3.chain.cert.pem dest={{ cert_file }} owner=root mode=0600
     - name: copy nginx config file
