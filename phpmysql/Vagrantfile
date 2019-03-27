@@ -1,0 +1,45 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.define "web" do |web|
+    web.vm.box                      = "hashicorp-vagrant/ubuntu-16.04"
+    web.ssh.username                = "vagrant"
+    web.ssh.password                = "vagrant"
+    web.ssh.insert_key              = false
+    web.ssh.forward_agent           = true
+    web.vm.box_check_update         = false
+    web.vm.hostname                 = "web.ubuntu.com"
+    web.vm.network                  "private_network", ip: "192.168.100.6"
+    web.vm.synced_folder            "web", "/vagrant"
+    web.vm.provision                :shell, path: "web/bootstrap.sh"
+  end
+
+  config.vm.define "db" do |db|
+    db.vm.box                      = "hashicorp-vagrant/ubuntu-16.04"
+    db.ssh.username                = "vagrant"
+    db.ssh.password                = "vagrant"
+    db.ssh.insert_key              = false
+    db.ssh.forward_agent           = true
+    db.vm.box_check_update         = false
+    db.vm.hostname                 = "db.ubuntu.com"
+    db.vm.network                  "private_network", ip: "192.168.100.7"
+    db.vm.synced_folder            "db", "/vagrant"
+    db.vm.provision                :shell, path: "db/bootstrap.sh"
+  end
+
+  config.vm.define "ans" do |ans|
+    ans.vm.box                      = "hashicorp-vagrant/ubuntu-16.04"
+    ans.ssh.username                = "vagrant"
+    ans.ssh.password                = "vagrant"
+    ans.ssh.insert_key              = false
+    ans.ssh.forward_agent           = true
+    ans.vm.box_check_update         = false
+    ans.vm.hostname                 = "ans.ubuntu.com"
+    ans.vm.network                  "private_network", ip: "192.168.100.8"
+    ans.vm.synced_folder            "ans", "/vagrant"
+    ans.vm.provision                :shell, path: "ans/bootstrap.sh"
+  end
+end
+
+
