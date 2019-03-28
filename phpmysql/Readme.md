@@ -1,19 +1,11 @@
+ansible-playbook install_and_config_webserver.yml -e env=prd
+
 Referred to:
 
 SERVER
 https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
 
 WEB
-
-
-
-
-
-
-
-
-
-
 https://www.linode.com/docs/databases/mysql/how-to-install-mysql-on-centos-7/
 https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-centos-7
 https://www.tecmint.com/install-latest-mysql-on-rhel-centos-and-fedora/
