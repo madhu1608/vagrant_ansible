@@ -67,7 +67,7 @@ Run the following, to setup the client and connect using command line tools.
 
 "phpcli.ubuntu.com"
 Run the following, to setup the php client and connect using php -f command or browser.
-
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04
     [vagrant@phpcli ~]$sudo yum update -y
     [vagrant@phpcli ~]$sudo yum install wget
     [vagrant@phpcli ~]$wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm

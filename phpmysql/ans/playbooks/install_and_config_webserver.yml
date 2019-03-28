@@ -1,0 +1,26 @@
+---
+- name: Playbook to install apache2 and mysql
+  hosts: webservers
+  become: yes
+  
+  vars_files:
+    - vars_files/person.yml
+
+  tasks:
+    - name: task to install apache2
+      apt: name=apache2 state=installed
+
+    - name: task to install php
+      apt: name={{item}} state=installed
+      with_items:
+        - php
+        - libapache2-mod-php
+        - php-mysql
+
+    - name: copy phpfile to webserver
+      copy: src=files/phpinfo.php dest=/var/www/html
+
+    - name: copy person info to webserver
+      template: src=templates/welcome_person.html.j2 dest=/var/www/html/welcome_person.html
+
+
