@@ -1,0 +1,3 @@
+username: preuser
+log_level: debug
+vpc_name: pre_vpc

@@ -2,9 +2,13 @@
 - name: Playbook to install apache2 and mysql
   hosts: webservers
   become: yes
-  
+
+  vars:
+    env: null  
+
   vars_files:
-    - vars_files/person.yml
+    - vars_files/{{ env }}.yml
+    - vars_files/common.yml
 
   tasks:
     - name: task to install apache2
@@ -23,4 +27,60 @@
     - name: copy person info to webserver
       template: src=templates/welcome_person.html.j2 dest=/var/www/html/welcome_person.html
 
+    - name: copy apach2 conf to webserver
+      template: src=templates/apache2.conf.j2 dest=/etc/apache2/apache2.conf
+      notify: restart apache2
 
+
+  handlers:
+    - name: restart apache2
+      service: name=apache2 state=restarted
+
+- name: Copy compiled files to local machine and then s3
+  hosts: local
+  
+  vars:
+    dest: /vagrant/playbooks/destination
+    bucket: mm009780
+    vpc_name: testvpc
+    stack_name: teststack
+    region: us-east-2
+    
+  vars_files:
+    - vars_files/{{ env }}.yml
+    - vars_files/common.yml
+
+  tasks:
+    - name: copy phpfile to local
+      copy: src=files/phpinfo.php dest={{ dest }}
+
+    - name: copy person info to local
+      template: src=templates/welcome_person.html.j2 dest={{ dest }}/welcome_person.html
+
+    - name: copy apach2 conf to local
+      template: src=templates/apache2.conf.j2 dest={{ dest }}/apache2.conf
+
+    - name: copy cf template to local
+      template: src=templates/out_test_vpc.yml.j2 dest={{ dest }}/out_test_vpc.yml
+
+    - name: sync resources to s3
+      command: aws s3 sync --delete {{ dest }}/ s3://{{ bucket }}/
+    
+    - name: check if stack already exists
+      command: aws cloudformation describe-stacks --stack-name={{ stack_name }}
+      register: stack_exists
+      ignore_errors: yes
+    #- debug: msg="rc 255 if stack does not exist else 0. rc= {{ stack_exists.rc }}"
+
+    - when: stack_exists.rc == 255
+      name: create stack
+      command: aws cloudformation create-stack --stack-name {{ stack_name }} --template-url https://s3.{{ region }}.amazonaws.com/{{ bucket }}/out_test_vpc.yml
+      
+    - when: stack_exists.rc == 0
+      name: update stack
+      command: aws cloudformation update-stack --stack-name {{ stack_name }} --template-url https://s3.{{ region }}.amazonaws.com/{{ bucket }}/out_test_vpc.yml
+      register: updatestack_rc
+      ignore_errors: yes
+
+    - debug: msg="{{ updatestack_rc.stderr }}"
+      ignore_errors: yes
