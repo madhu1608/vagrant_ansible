@@ -1,0 +1,14 @@
+check presence of tag xxxx
+	not present
+		No successful build earlier, go ahead
+	present
+		any indication of force rebuid
+			stop build information the build was already done
+		yes incdication of force rebuild
+			execute with a rebuild option
+execute 
+	if job_success
+		if rebuild option is not present
+			add tag xxxx to repo
+	else
+		announce failure
