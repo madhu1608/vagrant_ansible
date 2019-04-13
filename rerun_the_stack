@@ -1,11 +1,15 @@
-check presence of tag xxxx
+check presence of tag xxxx (hint: xxxx = release_name to build)
 	not present
 		No successful build earlier, go ahead
+		set the git clone branch_name as master for app, cfmgmt
+		set the git clone branch_name as env for tokens
 	present
 		any indication of force rebuid
 			stop build information the build was already done
 		yes incdication of force rebuild
 			execute with a rebuild option
+			set the git clone branch_name as xxxx for app, cfmgmt
+			set the git clone branch_name as env_xxxx for tokens
 execute 
 	if job_success
 		if rebuild option is not present
