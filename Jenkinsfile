@@ -1,10 +1,13 @@
 pipeline {
   agent any
   stages {
-    stage('') {
+    stage('error') {
       steps {
         sh 'echo "Madhu"'
       }
     }
+  }
+  environment {
+    name = 'manog'
   }
 }
